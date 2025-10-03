@@ -4,6 +4,7 @@ import json
 import nltk
 import joblib
 import random
+import unicodedata
 import numpy as np
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -56,6 +57,9 @@ class NLPModel:
         self.raw_data = {}
         self.intents = []
         self.menu = {}
+        self.menu_items = []
+        self.menu_by_name = {}
+        self.alias_index = {}
         self._load_data()
 
     def _load_data(self):
@@ -66,6 +70,7 @@ class NLPModel:
         self.raw_data = data
         self.intents = data.get('intents', [])
         self.menu = data.get('cardapio_detalhado', {})
+        self._build_menu_index()
 
     def _preprocess(self, text):
         """
@@ -75,6 +80,12 @@ class NLPModel:
         tokens = nltk.word_tokenize(text, language='portuguese')
         stemmed_tokens = [self.stemmer.stem(word) for word in tokens if word not in self.stopwords and word.isalpha()]
         return " ".join(stemmed_tokens)
+
+    def _normalize_text(self, text):
+        if not text:
+            return ""
+        normalized = unicodedata.normalize('NFD', text.lower())
+        return "".join(ch for ch in normalized if ch.isalnum() or ch.isspace())
 
     def _format_price(self, value):
         """Formata valores numéricos no padrão monetário brasileiro simples."""
@@ -90,12 +101,138 @@ class NLPModel:
                 return random.choice(intent['responses'])
         return ""
 
-    def _compose_multi_intent_answer(self, categories_found):
+    def _register_alias(self, alias, entry):
+        normalized = self._normalize_text(alias)
+        if not normalized:
+            return
+        bucket = self.alias_index.setdefault(normalized, [])
+        if entry not in bucket:
+            bucket.append(entry)
+
+    def _build_menu_index(self):
+        self.menu_items = []
+        self.menu_by_name = {}
+        self.alias_index = {}
+
+        section_labels = {
+            'hamburgueres': 'lanche',
+            'bebidas': 'bebida',
+            'acompanhamentos': 'acompanhamento',
+            'sobremesas': 'sobremesa'
+        }
+
+        alias_extra = {
+            'Classic Geek': ['classic geek', 'classic geek burger', 'classic'],
+            'Bacon Overflow': ['bacon overflow', 'burger bacon', 'bacon'],
+            'Veggie Kernel': ['veggie kernel', 'veggie', 'burger vegetariano'],
+            'Chicken Run': ['chicken run', 'burger de frango', 'lanche de frango'],
+            'Cooler C++': ['cooler c++', 'cooler', 'refrigerante artesanal', 'refri artesanal'],
+            'Heineken': ['cerveja heineken'],
+            'Budweiser': ['cerveja budweiser'],
+            'Java Shake': ['java shake', 'milkshake java', 'milk shake', 'shake de cafe', 'milkshake'],
+            'Água Mineral': ['agua mineral', 'agua', 'água', 'agua sem gas'],
+            'Kernel Fries': ['kernel fries', 'batata frita', 'batata', 'fritas'],
+            'Onion Rings': ['onion rings', 'aneis de cebola', 'anel de cebola'],
+            'Binary Brownie': ['binary brownie', 'brownie'],
+            'Cookies Stack': ['cookies stack', 'cookie', 'cookies']
+        }
+
+        general_aliases = {
+            'refrigerante': ['Cooler C++'],
+            'refri': ['Cooler C++'],
+            'cerveja': ['Heineken', 'Budweiser'],
+            'cervejas': ['Heineken', 'Budweiser'],
+            'milkshake': ['Java Shake'],
+            'shake': ['Java Shake'],
+            'agua': ['Água Mineral'],
+            'água': ['Água Mineral'],
+            'sobremesa': ['Binary Brownie', 'Cookies Stack'],
+            'sobremesas': ['Binary Brownie', 'Cookies Stack'],
+            'doce': ['Binary Brownie', 'Cookies Stack'],
+            'doces': ['Binary Brownie', 'Cookies Stack'],
+            'batata': ['Kernel Fries'],
+            'batatas': ['Kernel Fries'],
+            'fritas': ['Kernel Fries'],
+            'cebola': ['Onion Rings'],
+            'lanche classic geek': ['Classic Geek'],
+            'lanche bacon': ['Bacon Overflow'],
+            'lanche veggie': ['Veggie Kernel'],
+            'lanche frango': ['Chicken Run']
+        }
+
+        for section, label in section_labels.items():
+            for item in self.menu.get(section, []):
+                name = item.get('nome')
+                if not name:
+                    continue
+
+                entry = {
+                    'nome': name,
+                    'preco': item.get('preco'),
+                    'descricao': item.get('descricao', ''),
+                    'grupo': label,
+                    'tipo_bebida': item.get('tipo', '')
+                }
+
+                self.menu_items.append(entry)
+                self.menu_by_name[name] = entry
+
+                aliases = set()
+                aliases.add(name)
+                aliases.update(alias_extra.get(name, []))
+
+                if item.get('tipo'):
+                    aliases.add(item['tipo'])
+
+                for alias in aliases:
+                    self._register_alias(alias, entry)
+
+        for alias, names in general_aliases.items():
+            for name in names:
+                entry = self.menu_by_name.get(name)
+                if entry:
+                    self._register_alias(alias, entry)
+
+    def _detect_menu_items(self, text):
+        normalized_text = self._normalize_text(text)
+        if not normalized_text:
+            return []
+
+        found = []
+        seen = set()
+        for alias, entries in self.alias_index.items():
+            if alias and alias in normalized_text:
+                for entry in entries:
+                    key = entry['nome']
+                    if key not in seen:
+                        seen.add(key)
+                        found.append(entry)
+        return found
+
+    def _compose_item_price_answer(self, items):
+        parts = []
+        for item in items:
+            price = self._format_price(item.get('preco'))
+            if not price:
+                continue
+            description = item.get('descricao')
+            if description:
+                parts.append(f"{item['nome']} ({description}) custa {price}.")
+            else:
+                parts.append(f"{item['nome']} custa {price}.")
+        return " ".join(parts).strip()
+
+    def _compose_multi_intent_answer(self, categories_found, items_requested=None):
         """Monta uma resposta única com base nas categorias identificadas."""
         parts = []
+        items_requested = items_requested or []
+        item_groups = {item.get('grupo') for item in items_requested}
+
+        if categories_found.get('preço') and items_requested:
+            parts.append(self._compose_item_price_answer(items_requested))
 
         burgers = self.menu.get('hamburgueres', [])
-        if burgers and (categories_found.get('preço') or categories_found.get('cardápio')):
+        if burgers and (categories_found.get('preço') or categories_found.get('cardápio')) and 'lanche' not in item_groups:
             burger_details = []
             for item in burgers:
                 name = item.get('nome')
@@ -106,15 +243,15 @@ class NLPModel:
                 parts.append(f"Nossos hambúrgueres: {', '.join(burger_details)}.")
 
         bebidas = self.menu.get('bebidas', [])
-        if bebidas and (categories_found.get('bebida') or categories_found.get('preço')):
-            refrigerantes = [b for b in bebidas if b.get('tipo', '').lower() == 'refrigerante']
+        if bebidas and (categories_found.get('bebida') or categories_found.get('preço')) and 'bebida' not in item_groups:
+            refrigerantes = [b for b in bebidas if self._normalize_text(b.get('tipo', '')) == 'refrigerante']
             if refrigerantes:
                 refri = refrigerantes[0]
                 refri_price = self._format_price(refri.get('preco'))
                 if refri.get('nome') and refri_price:
                     parts.append(f"O refrigerante {refri.get('nome')} custa {refri_price}.")
 
-            other_beverages = [b for b in bebidas if b.get('tipo', '').lower() != 'refrigerante']
+            other_beverages = [b for b in bebidas if self._normalize_text(b.get('tipo', '')) != 'refrigerante']
             if other_beverages:
                 beverage_texts = []
                 for beverage in other_beverages:
@@ -131,7 +268,7 @@ class NLPModel:
                     parts.append(f"Também servimos {', '.join(beverage_texts)}.")
 
         sides = self.menu.get('acompanhamentos', [])
-        if sides and categories_found.get('cardápio'):
+        if sides and categories_found.get('cardápio') and 'acompanhamento' not in item_groups:
             sides_details = []
             for item in sides:
                 name = item.get('nome')
@@ -141,13 +278,30 @@ class NLPModel:
             if sides_details:
                 parts.append(f"Para acompanhar, temos {', '.join(sides_details)}.")
 
+        desserts = self.menu.get('sobremesas', [])
+        add_desserts = False
+        if categories_found.get('sobremesa') and 'sobremesa' not in item_groups:
+            add_desserts = True
+        elif categories_found.get('cardápio') and 'sobremesa' not in item_groups:
+            add_desserts = True
+
+        if desserts and add_desserts:
+            dessert_details = []
+            for item in desserts:
+                name = item.get('nome')
+                price = self._format_price(item.get('preco'))
+                if name and price:
+                    dessert_details.append(f"{name} ({price})")
+            if dessert_details:
+                parts.append(f"Sobremesas disponíveis: {', '.join(dessert_details)}.")
+
         if categories_found.get('entrega'):
             delivery_text = self._get_random_response('tempo_entrega')
             if not delivery_text:
                 delivery_text = "Nosso tempo médio de entrega fica entre 35 e 50 minutos, conforme sua região."
             parts.append(delivery_text)
 
-        return " ".join(parts).strip()
+        return " ".join(part for part in parts if part).strip()
 
     def train(self):
         """
@@ -224,13 +378,16 @@ class NLPModel:
         
         # Identificar quais categorias estão presentes na mensagem
         categories_found = {}
+        lower_text = text.lower()
         for category, words in keywords.items():
-            if any(word in text.lower() for word in words):
+            if any(word in lower_text for word in words):
                 categories_found[category] = True
-        
+
+        items_requested = self._detect_menu_items(text)
+
         # Se encontrar mais de uma categoria, processa como múltiplas intenções
         if len(categories_found) > 1:
-            combined_answer = self._compose_multi_intent_answer(categories_found)
+            combined_answer = self._compose_multi_intent_answer(categories_found, items_requested)
             if combined_answer:
                 return "multiplas_intencoes", 0.97, combined_answer
 
@@ -254,7 +411,10 @@ class NLPModel:
 
             # Verificar cada categoria e buscar respostas específicas
             if categories_found.get('preço'):
-                preco_answer = self._get_random_response('ver_preco')
+                if items_requested:
+                    preco_answer = self._compose_item_price_answer(items_requested)
+                else:
+                    preco_answer = self._get_random_response('ver_preco')
                 if preco_answer:
                     intent_responses.append(preco_answer)
 
@@ -278,6 +438,12 @@ class NLPModel:
             if generic_answer:
                 return "multiplas_intencoes", 0.95, generic_answer
         
+        # Se a intenção for focada em preços e encontramos itens específicos
+        if categories_found.get('preço') and items_requested:
+            item_answer = self._compose_item_price_answer(items_requested)
+            if item_answer:
+                return 'ver_preco', 0.96, item_answer
+
         # Caso contrário, segue com a predição normal
         prediction_proba = self.model.predict_proba([processed_text])
         
@@ -292,11 +458,15 @@ class NLPModel:
             if intent['tag'] == intent_tag:
                 answer = random.choice(intent['responses'])
                 break
-        
+
+        if intent_tag == 'ver_preco' and items_requested:
+            specific_answer = self._compose_item_price_answer(items_requested)
+            if specific_answer:
+                answer = specific_answer
+
         return intent_tag, confidence, answer
 
 if __name__ == '__main__':
     # Bloco para executar o treinamento diretamente
     nlp_model = NLPModel()
     nlp_model.train()
-
