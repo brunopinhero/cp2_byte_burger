@@ -1,0 +1,167 @@
+{
+  "cardapio_detalhado": {
+    "hamburgueres": [
+      {
+        "nome": "Classic Geek",
+        "preco": 28.50,
+        "descricao": "Pão brioche, burger de 150g, queijo cheddar, alface, tomate e nosso molho especial da casa."
+      },
+      {
+        "nome": "Bacon Overflow",
+        "preco": 34.00,
+        "descricao": "Pão australiano, burger de 180g, dobro de queijo cheddar, fatias generosas de bacon crocante e maionese de alho."
+      },
+      {
+        "nome": "Veggie Kernel",
+        "preco": 32.00,
+        "descricao": "Pão integral, burger de grão de bico com espinafre, queijo prato, rúcula, tomate seco e maionese verde."
+      },
+      {
+        "nome": "Chicken Run",
+        "preco": 30.00,
+        "descricao": "Pão de gergelim, file de frango empanado e crocante, alface americana e molho tártaro."
+      }
+    ],
+    "bebidas": [
+      {
+        "nome": "Cooler C++",
+        "preco": 8.00,
+        "tipo": "Refrigerante",
+        "descricao": "Nossa linha de refrigerantes artesanais. Sabores: Cola, Guaraná, Laranja e Limão."
+      },
+      {
+        "nome": "Heineken",
+        "preco": 12.00,
+        "tipo": "Cerveja",
+        "descricao": "Cerveja Heineken Long Neck 330ml."
+      },
+      {
+        "nome": "Budweiser",
+        "preco": 11.00,
+        "tipo": "Cerveja",
+        "descricao": "Cerveja Budweiser Long Neck 330ml."
+      },
+      {
+        "nome": "Java Shake",
+        "preco": 18.00,
+        "tipo": "Milkshake",
+        "descricao": "Milkshake cremoso de café com chantilly. Sabores: Baunilha, Chocolate e Morango."
+      },
+      {
+        "nome": "Água Mineral",
+        "preco": 5.00,
+        "tipo": "Água",
+        "descricao": "Água com ou sem gás."
+      }
+    ],
+    "acompanhamentos": [
+      {
+        "nome": "Kernel Fries",
+        "preco": 15.00,
+        "descricao": "Batatas fritas crocantes e sequinhas."
+      },
+      {
+        "nome": "Onion Rings",
+        "preco": 18.00,
+        "descricao": "Anéis de cebola empanados e crocantes, acompanham molho barbecue."
+      }
+    ]
+  },
+  "intents": [
+    {
+      "tag": "cumprimento",
+      "patterns": [
+        "oi", "ola", "bom dia", "boa tarde", "boa noite", "e aí", "tudo bem", "opa", "salve", "ei", "iae", "oiiie", "olá, gostaria de pedir", "como vai?", "tudo certo?", "fala, meu nobre", "boas", "tem alguem ai?", "posso começar?", "iniciar", "ajuda", "oi, tudo bom?", "olá pessoal", "cheguei", "como estão?", "queria uma informação", "oi, me ajuda aqui", "iae blz?", "fala cmg", "ola, boa noite, tudo bem?", "oi, queria fazer um pedido", "oi, boa tarde", "bom dia, tudo bem?", "olá, pode me ajudar?", "oi, queria ver o cardapio", "começar", "start", "oi, preciso de ajuda", "eae", "fala ai", "oi, como funciona?", "olá, estou com fome", "bom dia, queria pedir", "boa tarde, aceitam pedido?", "boa noite, estão abertos?", "oi, atendente", "oi, chat", "oi, bot", "ola, byte burger", "hey", "hello", "hi", "boa noite, me ajuda", "olá, um minuto", "oi, queria saber mais", "oi, informações", "oi, queria tirar uma duvida", "ola, como faço para pedir?", "oi, to perdido", "oi, preciso de um help", "ola, queria ver os lanches", "oi, como vai o atendimento?", "oi, td bem?", "ola, td certo?", "blz?", "oi, queria um burger", "oi, quero comer", "ola, vamos pedir", "oi, posso pedir?", "ola, vamos lá", "oi, me atende", "ola, por favor", "ola, com licença", "oi, tem gente?", "oie", "oiee", "oieee", "oii", "alguem online?", "ola, me responde", "oi, to aqui", "ola, estou esperando", "oi, pode ser?", "ola, vamos conversar", "oi, estou pronto", "ola, pronto para pedir", "oi, faminto", "ola, faminta", "oi, bora", "ola, vamo que vamo", "oi, da um alo", "ola, me da um oi", "oi, me cumprimenta", "ola, me saude", "oi, um salve", "ola, uma saudação", "bom dia, como posso pedir?", "boa tarde, quero um lanche", "boa noite, quero jantar"
+      ],
+      "responses": [
+        "Olá! Bem-vindo ao Byte Burger! Como posso ajudar?", "Oi! Em que posso ser útil hoje?", "E aí, tudo certo? Estou pronto para te ajudar no Byte Burger!", "Seja bem-vindo(a)! O que manda de bom?", "Opa! Chegou na melhor hamburgueria de TI. O que deseja?", "Olá! Estou à sua disposição. Pode pedir o cardápio ou me dizer o que quer.", "Oi! Que bom te ver por aqui. Como posso te ajudar a matar a fome?", "Bem-vindo ao Byte Burger! Estou pronto para anotar seu pedido.", "E aí, tudo joia? Me diga como posso te ajudar.", "Olá! Fique à vontade para explorar nosso cardápio.", "Oi, tudo bem? Espero que esteja com fome!", "Seja bem-vindo(a) ao Byte Burger! O que vai ser hoje?", "Olá! Pronto para uma experiência deliciosamente geek?", "Oi! Que a força da fome esteja com você. Como ajudo?", "Bem-vindo! Nosso código para a fome está compilado e pronto para executar.", "Olá! Em que posso ser útil? Temos burgers, acompanhamentos e bebidas.", "Oi, que bom que você veio! O que te traz aqui?", "Olá! Preparado(a) para o melhor burger da sua vida?", "Oi! Pode falar, estou aqui para ajudar.", "Bem-vindo(a)! Sou o assistente do Byte Burger e estou pronto para começar."
+      ]
+    },
+    {
+      "tag": "despedida",
+      "patterns": [
+        "tchau", "até mais", "adeus", "até logo", "flw", "vlw", "obrigado, só isso", "finalizar", "encerrar", "já pedi", "era só isso", "por enquanto é só", "valeu, até a próxima", "tchua", "xau", "fui", "abraço", "era isso", "por hoje é só", "pronto, finalizei", "acabou", "terminei", "só isso mesmo", "valeu, brigado", "tchau, obrigado", "até mais ver", "vou sair", "estou de saida", "desconectar", "sair", "obrigado, pode encerrar", "tchau tchau", "bye", "bye bye", "ate mais tarde", "a gente se ve", "falou", "ja era", "concluido", "pedido feito, tchau", "obrigado, tchau", "valeu, falou", "ok, tchau", "certo, até mais", "fechou, tchau", "ja fiz o pedido, vlw", "pronto, obrigado e tchau", "nao quero mais nada", "sem mais perguntas", "minhas duvidas acabaram", "era so essa duvida, tchau", "agora sim, tchau", "beleza, tchau", "blz, flw", "ok, ate", "certo, vlw", "fechado, ate logo", "ja me decidi, tchau", "pronto, pode ir", "acabamos", "terminamos", "fim de papo", "final da conversa", "desligar", "tchau, ate a proxima", "valeu, um abraço", "ok, obrigado, tchau", "certo, valeu, falou", "fechou, obrigado, ate mais", "ja sei o que quero, tchau", "pronto, agora vou pedir", "acabou o expediente", "finalizando por aqui", "tchau, boa noite", "tchau, bom dia", "tchau, boa tarde", "valeu, boa noite", "ok, boa noite", "certo, boa noite", "fechou, boa noite", "ja vou, tchau", "to indo, flw", "partiu, vlw", "ate amanha", "nos vemos depois", "fique com deus", "se cuida", "abraços", "beijos", "ate", "t+", "++"
+      ],
+      "responses": [
+        "Até mais! A equipe do Byte Burger agradece!", "Tchau! Volte sempre!", "Qualquer coisa é só chamar!", "Fechado! Tenha um ótimo dia!", "Até a próxima! Seu pedido já está sendo preparado (se tiver feito um).", "Ok, até logo! Obrigado pela preferência.", "Tchau! Espero te ver em breve.", "Falou! Qualquer dúvida, estamos aqui.", "Beleza, até a próxima!", "Agradecemos o contato. Tchau!", "Ok, finalizando. Tenha um excelente dia!", "Tchau! E bom apetite!", "Até mais! Se precisar, é só chamar de novo.", "Certo! Obrigado por conversar com a gente.", "Tchau! Que seu dia seja ótimo.", "Até logo! A Byte Burger está sempre de portas abertas.", "Ok, até mais! Não se esqueça de nós na sua próxima fome.", "Tchau! Foi um prazer ajudar.", "Finalizado! Qualquer outra coisa, estou por aqui.", "Até a próxima! Obrigado por escolher o Byte Burger."
+      ]
+    },
+    {
+      "tag": "agradecimento",
+      "patterns": [
+        "obrigado", "obg", "valeu", "muito obrigado", "agradecido", "grato", "show de bola, vlw", "brigadão", "top, obrigado", "ajudou muito", "perfeito, obrigado", "obrigado pela ajuda", "vlw mesmo", "obrigado, amigo", "obrigada", "obrigadinho", "obrigadinha", "gratidão", "agradeço", "muito grato", "extremamente grato", "valeu pela força", "obrigado pela atenção", "muito bom, obrigado", "excelente, obrigado", "maravilha, obrigado", "joia, obrigado", "ok, obrigado", "certo, obrigado", "fechou, obrigado", "beleza, obrigado", "blz, obg", "show, vlw", "top, valeu", "massa, obrigado", "legal, obrigado", "bacana, obrigado", "daora, obrigado", "firmeza, obrigado", "gentil da sua parte, obrigado", "muito gentil, obrigado", "amavel, obrigado", "obrigado pelo suporte", "obrigado pelo help", "vlw pela ajuda", "obg pelo apoio", "obrigado pela informação", "obrigado pela resposta", "obrigado pelo retorno", "obrigado pelo feedback", "obrigado pelo esclarecimento", "obrigado pela dica", "obrigado pela sugestão", "obrigado pela recomendação", "obrigado pelo conselho", "obrigado pela orientação", "obrigado pela paciência", "obrigado pela compreensão", "obrigado pela cooperação", "obrigado pela colaboração", "obrigado pela parceria", "obrigado pela amizade", "obrigado por tudo", "obrigado por existir", "obrigado, meu caro", "obrigado, minha cara", "obrigado, jovem", "obrigado, mestre", "obrigado, campeão", "obrigado, fera", "obrigado, guerreiro", "obrigado, anjo", "obrigado, querido", "obrigado, querida", "obrigado, meu bem", "obrigado, meu amor", "obrigado, meu anjo", "obrigado, meu tudo", "obrigado, deus", "obrigado, jesus", "obrigado, alá", "obrigado, buda", "obrigado, universo", "obrigado, vida", "obrigado, natureza", "obrigado, mundo", "obrigado, brasil"
+      ],
+      "responses": [
+        "De nada! Precisando, é só chamar.", "Eu que agradeço a preferência!", "Disponha!", "Tamo junto! Se precisar de mais algo, é só falar.", "Imagina! É um prazer ajudar.", "Por nada! Fico feliz em poder ajudar.", "De nada! Estamos aqui para isso.", "Imagina, que isso! Se precisar, tô aqui.", "Disponha sempre!", "Não há de quê!", "De nada! Volte sempre que precisar.", "Com prazer! Agradeço o contato.", "Por nada! Se tiver mais alguma dúvida, pode mandar.", "De nada! Missão cumprida.", "Que isso, de nada! Fico à disposição.", "Sem problemas! Foi um prazer.", "De nada! :)", "Por nada! 😉", "Disponha! 😄", "De nada! Se cuida."
+      ]
+    },
+    {
+      "tag": "ver_cardapio_geral",
+      "patterns": [
+        "qual o cardapio", "me ve o cardapio", "o que vcs tem", "quais as opções", "mostra o menu", "cardapio", "quais os lanches?", "ver o menu completo", "opções de comida", "o que tem pra comer ai?", "cardapio por favor", "cardapioo", "cade o cardapio", "me manda o menu", "queria ver as comidas", "o que voces servem?", "quais os burgers", "ver os hamburgueres", "opcoes de lanche", "me fala o que tem", "pode me mostrar o cardapio?", "tem cardapio online?", "link do cardapio", "o cardápio, por gentileza", "menu", "o menu, pfv", "cardapio completo", "todas as opções", "lista de comidas", "lista de lanches", "lista de produtos", "o que vende?", "vcs tem o que?", "o que eu posso pedir?", "queria o cardápio", "cardapio pf", "kardapio", "cardapio?", "e o cardapio?", "fala do cardapio", "me diz o cardapio", "quais os tipos de comida", "mostra tudo", "ver tudo", "queria dar uma olhada no cardapio", "opções do dia", "sugestões do cardapio", "o que tem de bom?", "o que me recomenda?", "o que mais sai?", "qual o carro chefe?", "especialidade da casa", "o que tem no cardapio hoje?", "ver o cardapio de hoje", "opções para jantar", "opções para almoço", "o que tem de lanche?", "quais os sanduiches?", "lista de hamburgueres", "tem algum combo?", "e os combos?", "ver as promoções", "o que tem na promoção?", "cardapio de promoções", "cardapio de combos", "queria ver os pratos", "quais os pratos da casa?", "mostra os pratos", "cardapio de hoje", "menu do dia", "prato do dia", "sugestão do chef", "o que o chef recomenda?", "cardapio, por favor", "menu, por favor", "opções, por favor", "comidas, por favor", "lanches, por favor", "hamburgueres, por favor", "sanduiches, por favor", "pratos, por favor", "combos, por favor", "promoções, por favor", "bebidas, por favor", "sobremesas, por favor", "acompanhamentos, por favor", "porções, por favor", "entradas, por favor", "petiscos, por favor", "tira-gostos, por favor"
+      ],
+      "responses": [
+        "Nosso cardápio é cheio de delícias! Temos os burgers Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (R$32,00) e Chicken Run (R$30,00). Para acompanhar, temos as Kernel Fries (R$15,00) e Onion Rings (R$18,00). E para beber, refrigerantes, cervejas e milkshakes!",
+        "Claro! Nossas especialidades são os hambúrgueres: Classic Geek (pão brioche, burger 150g, queijo cheddar, alface, tomate e molho especial) por R$28,50; Bacon Overflow (pão australiano, burger 180g, queijo cheddar em dobro e bacon crocante) por R$34,00; Veggie Kernel (vegetariano) por R$32,00; e Chicken Run (frango crocante) por R$30,00. Temos também acompanhamentos como batatas fritas (R$15,00) e anéis de cebola (R$18,00).",
+        "Na Byte Burger temos: BURGERS: Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (R$32,00) e Chicken Run (R$30,00). ACOMPANHAMENTOS: Kernel Fries (R$15,00) e Onion Rings (R$18,00). BEBIDAS: Refrigerantes (R$8,00), Cervejas (a partir de R$11,00) e Milkshakes (R$18,00).",
+        "Se prepare para a fome! Nosso menu tem: Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (R$32,00) e Chicken Run (R$30,00). Para acompanhar, não deixe de pedir nossas Kernel Fries (R$15,00) ou Onion Rings (R$18,00). Temos também bebidas variadas para todos os gostos!"
+      ]
+    },
+    {
+      "tag": "ver_preco",
+      "patterns": [
+        "quanto custa", "qual o preco", "qual o valor", "preco do bacon overflow", "valor do classic geek", "qnt custa o java shake", "preço da heineken", "valor das kernel fries", "me fala os precos", "quanto é um chicken run?", "preço do veggie kernel", "valor do refri", "e o preço do cooler c++", "preço da budweiser", "qnt fica um bacon overflow com fritas?", "qual o preço do onion rings?", "valor da água mineral", "preço do milkshake", "quanto custa um classic geek?", "qual o valor do bacon overflow?", "preço do chicken run, por favor", "me diz o preço do veggie kernel", "quanto sai um java shake?", "e a heineken, qual o valor?", "budweiser custa quanto?", "preço das fritas", "e os anéis de cebola, qual o preço?", "quanto é a água?", "valor do cooler c++?", "preço dos refrigerantes", "e as cervejas, quais os preços?", "preço do milkshake de chocolate", "quanto fica tudo?", "qual o valor total?", "me passa os valores", "lista de preços", "tabela de preços", "queria saber os preços", "me informa os preços", "preços, por favor", "valores, por favor", "queria ver os preços dos burgers", "preço dos acompanhamentos", "valor das bebidas", "quanto custa para comer aí?", "é caro?", "os preços são bons?", "faixa de preço", "custo médio", "quanto vou gastar?", "preço do combo", "valor do combo classic geek", "quanto custa o combo com fritas e refri?", "preço do frete", "valor da entrega", "taxa de entrega, qual o valor?", "o preço do classic geek é quanto?", "e o bacon overflow, qual o valor?", "veggie kernel, preço?", "chicken run, valor?", "java shake, preço?", "heineken, valor?", "budweiser, preço?", "kernel fries, preço?", "onion rings, valor?", "cooler c++, preço?", "água, valor?", "precos", "preso", "preso do bacon", "qnto custa", "qnto e", "qunto custa", "kusto", "q custa", "valor do lanche", "preço da comida", "e os valores?", "queria saber o preço de tudo", "me fala o preço de cada item", "qual o burger mais caro?", "qual o mais barato?", "tem algo em conta?", "o que tem de mais barato?", "o que tem de mais caro?", "preço para duas pessoas", "valor para um casal", "quanto gastamos em média?", "preço final", "valor com a entrega", "preço total com frete", "orçamento", "queria um orçamento"
+      ],
+      "responses": [
+        "Aqui estão nossos preços: Hamburgueres: Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (R$32,00), Chicken Run (R$30,00). Acompanhamentos: Kernel Fries (R$15,00), Onion Rings (R$18,00). Bebidas: Refrigerantes (R$8,00), Cervejas (Heineken R$12,00, Budweiser R$11,00), Java Shake (R$18,00), Água (R$5,00).", 
+        "Claro! Nossos preços são: BURGERS: Classic Geek R$28,50, Bacon Overflow R$34,00, Veggie Kernel R$32,00, Chicken Run R$30,00. ACOMPANHAMENTOS: Kernel Fries R$15,00, Onion Rings R$18,00. BEBIDAS: Refrigerantes R$8,00, Cervejas (Heineken R$12,00, Budweiser R$11,00), Java Shake R$18,00, Água R$5,00.", 
+        "Nossos preços são: Hambúrgueres - Classic Geek: R$28,50 | Bacon Overflow: R$34,00 | Veggie Kernel: R$32,00 | Chicken Run: R$30,00. Acompanhamentos - Kernel Fries: R$15,00 | Onion Rings: R$18,00. Bebidas - Refrigerantes: R$8,00 | Heineken: R$12,00 | Budweiser: R$11,00 | Java Shake: R$18,00 | Água: R$5,00.", 
+        "Seguem os preços do nosso cardápio: LANCHES: Classic Geek R$28,50, Bacon Overflow R$34,00, Veggie Kernel R$32,00, Chicken Run R$30,00. ACOMPANHAMENTOS: Kernel Fries R$15,00, Onion Rings R$18,00. BEBIDAS: Refrigerantes R$8,00, Cerveja Heineken R$12,00, Cerveja Budweiser R$11,00, Milkshake Java Shake R$18,00, Água Mineral R$5,00."
+      ]
+    },
+    {
+      "tag": "tempo_entrega",
+      "patterns": [
+        "quanto tempo pra entregar", "qual o tempo de entrega", "demora muito", "frete", "entrega", "qual a taxa de entrega", "entrega em quanto tempo?", "previsão de entrega", "vcs entregam?", "como funciona a entrega?", "taxa de entrega pra [bairro]", "o frete é gratis?", "quanto custa o frete?", "valor da entrega", "quanto tempo demora a entrega?", "a entrega é rapida?", "em quanto tempo chega?", "qual a previsao de chegada?", "o pedido chega hoje?", "vcs fazem entrega?", "tem delivery?", "como é o delivery?", "qual o valor do delivery?", "taxa de delivery", "tempo de delivery", "previsão do delivery", "o delivery demora?", "o delivery é rapido?", "quanto tempo o motoboy leva?", "o entregador demora?", "qual o prazo de entrega?", "prazo para entregar", "o prazo é longo?", "o prazo é curto?", "me da uma estimativa de entrega", "estimativa de tempo", "tempo estimado de entrega", "qual a média de tempo de entrega?", "tempo médio de entrega", "geralmente demora quanto tempo?", "normalmente leva quanto tempo?", "em média, quanto tempo?", "costuma demorar?", "a entrega é feita por quem?", "vcs tem entregador proprio?", "usam ifood?", "usam rappi?", "usam uber eats?", "posso retirar no local?", "tem retirada?", "tem take away?", "posso buscar?", "onde eu busco?", "qual o endereço para retirada?", "até que horas posso retirar?", "qual o horário de retirada?", "a entrega é agendada?", "posso agendar a entrega?", "como agendar a entrega?", "entrega em toda a cidade?", "qual a area de entrega?", "vcs entregam no meu bairro?", "entregam em [nome do bairro]?", "qual o valor do frete para [cep]?", "frete para o cep [cep]", "quanto fica a entrega em [endereço]?", "entregam nesse endereço?", "o frete é fixo?", "o frete varia?", "como é calculado o frete?", "tem valor minimo para entrega?", "pedido minimo para delivery", "a partir de qual valor o frete é gratis?", "tem promoção de frete gratis?", "frete gratis hoje?", "como conseguir frete gratis?", "tem cupom de frete gratis?", "posso pagar a entrega no cartão?", "paga a entrega na hora?", "o entregador tem troco?", "posso dar gorjeta para o entregador?", "a entrega é segura?", "o pedido vem lacrado?", "a embalagem é segura?", "se o pedido atrasar, o que eu faço?", "e se a entrega demorar mais que o previsto?", "tem como rastrear a entrega?", "como rastreio meu pedido?", "me manda o link de rastreio"
+      ],
+      "responses": [
+        "Nosso tempo médio de entrega é de 35 a 50 minutos. A taxa de entrega varia conforme a sua localização.", "A entrega costuma levar entre 35 e 50 minutos, dependendo da sua localização e da demanda no momento.", "A taxa de entrega é calculada com base no seu endereço. O tempo médio para a entrega é de 35 a 50 minutos.", "Estimamos um prazo de 35 a 50 minutos para a sua entrega chegar quentinha aí!", "O tempo de entrega pode variar, mas nossa média é de 35 a 50 minutos.", "Normalmente, nossos pedidos levam de 35 a 50 minutos para serem entregues.", "O prazo de entrega é de aproximadamente 35 a 50 minutos.", "Para a entrega, nosso tempo estimado é de 35 a 50 minutos.", "A entrega leva, em média, de 35 a 50 minutos. A taxa depende do seu endereço.", "Prevemos que seu pedido chegue em 35 a 50 minutos.", "O tempo de espera pela entrega é de cerca de 35 a 50 minutos.", "Nossos entregadores costumam levar de 35 a 50 minutos para chegar até você.", "A estimativa para delivery é de 35 a 50 minutos.", "A entrega é feita em um prazo de 35 a 50 minutos.", "O tempo de entrega padrão é de 35 a 50 minutos.", "Trabalhamos com um prazo de entrega de 35 a 50 minutos.", "Seu pedido deve chegar em um intervalo de 35 a 50 minutos.", "A média de tempo para nossos deliveries é de 35 a 50 minutos.", "O tempo de entrega é de 35 a 50 minutos, e a taxa de frete é calculada na finalização do pedido.", "Estimamos a entrega entre 35 e 50 minutos após a confirmação do pedido."
+      ]
+    },
+    {
+      "tag": "reclamacao",
+      "patterns": [
+        "isso está errado", "não gostei", "quero fazer uma reclamação", "pedido veio errado", "pedido atrasado", "comida fria", "faltou item", "burger mal passado", "hamburguer cru", "batata crua", "faltou molho", "muito sal", "pouco sal", "sem sabor", "muito apimentado", "muito óleo", "não foi isso que pedi", "veio trocado", "esqueceram de colocar", "pedi sem cebola e veio com cebola", "pedi bem passado e veio mal passado", "pedi sem queijo e veio com queijo", "pedi sem bacon e veio com bacon", "meu pedido está incompleto", "faltou o refrigerante", "não veio a batata", "esqueceram os anéis de cebola", "veio errado", "tá ruim", "horrível", "péssimo", "decepcionado", "decepcionada", "triste com o atendimento", "atendimento péssimo", "demora demais", "muito tempo de espera", "nunca mais", "quero meu dinheiro de volta", "quero reembolso", "vou denunciar", "vou reclamar", "vocês são muito ruins", "vocês são péssimos", "vou falar mal", "vou fazer post negativo", "vou postar no reclame aqui", "vocês enganam", "vocês mentem", "propaganda enganosa", "na foto é diferente", "na descrição era outra coisa", "fui enganado", "me sinto lesado", "me senti prejudicado", "me senti prejudicada", "isso é um absurdo", "inaceitável", "revoltante", "absurdo", "vergonhoso", "vergonha", "que decepção", "que tristeza", "não recomendo", "péssima experiência", "experiência terrível", "nunca mais volto", "nunca mais compro", "cancelar pedido", "devolver produto", "trocar produto", "estou insatisfeito", "estou insatisfeita", "produto ruim", "produto de má qualidade", "produto vencido", "burger estragado", "burger com gosto estranho", "hamburger com cheiro ruim", "comida vencida", "bebida vencida", "sujo", "tem cabelo", "achei algo estranho", "tem inseto", "tem mosca", "entrega demorou", "entregador grosso", "atendente grosso", "sem educação", "mal educado", "rude", "grosseiro", "estúpido", "sem paciência"
+      ],
+      "responses": [
+        "Lamento muito pelo ocorrido. Por favor, nos conte mais detalhes para que possamos resolver isso o mais rápido possível.", 
+        "Sentimos muito por essa experiência negativa. Vamos resolver isso para você. Pode nos informar mais detalhes?", 
+        "Pedimos sinceras desculpas pelo transtorno. Queremos corrigir essa situação. Pode nos dar mais informações?", 
+        "Lamentamos muito pelo inconveniente. Nosso objetivo é sempre oferecer o melhor atendimento e qualidade. Vamos resolver isso imediatamente.", 
+        "Entendemos sua frustração e gostaríamos de corrigir essa situação. Pode nos fornecer mais detalhes do ocorrido?", 
+        "Sua satisfação é nossa prioridade. Sentimos muito por não termos atendido suas expectativas. Vamos trabalhar para resolver isso rapidamente.", 
+        "Pedimos desculpas pelo erro. Nossa equipe irá verificar o que aconteceu para que isso não se repita.", 
+        "Lamentamos pelo ocorrido. Pode nos passar o número do seu pedido para verificarmos e resolvermos essa situação?", 
+        "Sentimos muito por essa experiência negativa. Nosso gerente entrará em contato para resolver sua reclamação.", 
+        "Isso não é o padrão de qualidade do Byte Burger. Pedimos desculpas e vamos resolver seu problema o mais rápido possível."
+      ]
+    },
+    {
+      "tag": "multiplas_intencoes",
+      "patterns": [
+        "oi, qual o cardapio e os preços?", "boa noite, queria ver o menu e saber quanto custa", "olá, tem milkshake? quais sabores?", "oi, quais os hamburgueres e acompanhamentos?", "ola, quais os lanches e bebidas?", "quanto custa o bacon overflow com fritas e refri?", "boa tarde, quais opções de hambúrguer e qual o preço?", "oi, me fala do classic geek e do bacon overflow", "tudo bem? queria saber sobre os acompanhamentos e bebidas", "bom dia, o que vem no veggie kernel e quanto custa?", "quero reclamar do meu pedido que veio errado", "preço do combo classic geek com batata e refrigerante", "oi, qual o cardápio, valores e tempo de entrega?", "olá, qual o lanche mais vendido e o preço?", "o que é o bacon overflow e quanto custa?", "quero fazer um pedido, mas antes qual o cardápio?", "vocês entregam? qual o cardápio e valor da taxa?", "boa noite, tem alguma promoção hoje? cardapio e valores", "oi, o que vem no chicken run e qual o preço?", "olá, quais são os lanches vegetarianos e valores?", "me fale mais sobre o milkshake e o preço", "quais bebidas alcoólicas vocês tem e preços?", "boa tarde, como vai? qual o cardápio de hoje?", "oi, tudo bem? o que tem de lanche e quanto custa?", "cardápio, preço e tempo de entrega por favor", "olá! quais os sabores de shake e os valores?", "oi, quais os lanches com bacon? preços?", "descrição do classic geek e valor", "e ai, como estão? quais as opções de hoje?", "olá! estou com fome, me mostra o cardápio?", "oi, quais os acompanhamentos e bebidas?", "tem alguma novidade no cardápio? preços?", "bom dia, vcs tem opção vegetariana? quanto custa?", "oi, gostaria de fazer uma reclamação sobre meu pedido"
+      ],
+      "responses": [
+        "Olá! Aqui está nosso cardápio com preços: HAMBURGUERES: Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (R$32,00) e Chicken Run (R$30,00). ACOMPANHAMENTOS: Kernel Fries (R$15,00) e Onion Rings (R$18,00). BEBIDAS: Refrigerantes (R$8,00), Cervejas (Heineken R$12,00, Budweiser R$11,00), Java Shake (milkshake de café nos sabores Baunilha, Chocolate e Morango - R$18,00) e Água Mineral (R$5,00).",
+        
+        "Oi! Bem-vindo ao Byte Burger! Nosso cardápio inclui: Burgers: Classic Geek (pão brioche, burger 150g, queijo cheddar, alface, tomate e molho especial - R$28,50), Bacon Overflow (pão australiano, burger 180g, queijo cheddar dobrado e bacon crocante - R$34,00), Veggie Kernel (vegetariano, pão integral e burger de grão de bico - R$32,00) e Chicken Run (frango empanado - R$30,00). Acompanhamentos: Batatas fritas (R$15,00) e anéis de cebola (R$18,00). Bebidas: Refrigerantes (R$8,00), cervejas e milkshakes (R$18,00).",
+        
+        "Olá! Temos o Java Shake (R$18,00), nosso milkshake premium de café com chantilly, disponível nos sabores Baunilha, Chocolate e Morango. E nosso cardápio completo inclui: Burgers como Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (vegetariano - R$32,00) e Chicken Run (frango - R$30,00). Acompanhamentos: Kernel Fries (R$15,00) e Onion Rings (R$18,00). Outras bebidas: Refrigerantes (R$8,00), Cervejas e Água Mineral (R$5,00).",
+        
+        "Lamento pelo ocorrido com seu pedido! Por favor, conte-nos mais detalhes para que possamos resolver isso o mais rápido possível. Nosso objetivo é sempre proporcionar a melhor experiência. Pode nos informar qual foi o problema específico com seu pedido?",
+        
+        "Oi! Nosso tempo médio de entrega é de 35-50 minutos. Nosso cardápio completo com preços: HAMBURGUERES: Classic Geek (R$28,50), Bacon Overflow (R$34,00), Veggie Kernel (vegetariano - R$32,00) e Chicken Run (frango - R$30,00). ACOMPANHAMENTOS: Batatas fritas (R$15,00) e anéis de cebola (R$18,00). BEBIDAS: Refrigerantes (R$8,00), Cervejas (a partir de R$11,00), Milkshakes (R$18,00) e Água (R$5,00). A taxa de entrega varia conforme sua localização."
+      ]
+    }
+  ]
+}

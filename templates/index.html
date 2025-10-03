@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chatbot Byte Burger - Atendimento inteligente para pedidos, cardápio e dúvidas gerais.">
+    <title>Byte Burger | Assistente Virtual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="brand-panel">
+            <div class="brand-panel__header">
+                <div class="brand-icon">🍔</div>
+                <div>
+                    <h1>Byte Burger</h1>
+                    <p>Sabor inteligente, atendimento instantâneo.</p>
+                </div>
+            </div>
+
+            <section class="brand-panel__card">
+                <h2>Combo do Dia</h2>
+                <p>Smash burger duplo + batata rústica + refri lata por apenas <strong>R$ 34,90</strong>.</p>
+            </section>
+
+            <section class="brand-panel__list">
+                <h3>Cardápio em destaque</h3>
+                <ul>
+                    <li>
+                        <h4>Byte Clássico</h4>
+                        <p>Pão brioche, burger 160g, cheddar e molho da casa.</p>
+                    </li>
+                    <li>
+                        <h4>Veggie Crunch</h4>
+                        <p>Burger de grão-de-bico, maionese defumada e folhas frescas.</p>
+                    </li>
+                    <li>
+                        <h4>Milkshake Neon</h4>
+                        <p>Chocolate + toque de baunilha com cobertura crocante.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <div class="brand-panel__footer">
+                <p>Quer agilizar seu pedido? Pergunte sobre tempo de entrega ou status da loja!</p>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <div>
+                    <h2>Assistente Virtual</h2>
+                    <div class="chat-status">
+                        <span class="status-dot"></span>
+                        <span>Estamos online</span>
+                    </div>
+                </div>
+                <p>Converse com a Byte Burger para descobrir ofertas, tirar dúvidas e acompanhar seu pedido.</p>
+            </header>
+
+            <section class="chat-box" id="chat-box">
+                <div class="message message--bot">
+                    <div class="avatar">🍟</div>
+                    <div class="bubble">
+                        <p>Olá! Eu sou o assistente virtual da Byte Burger 🍔<br>Posso mostrar o cardápio, indicar promoções, informar preços ou falar do tempo de entrega. Em que posso ajudar?</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-actions" id="quick-actions" hidden></section>
+
+            <footer class="chat-input-area">
+                <form id="chat-form" autocomplete="off">
+                    <label for="user-input" class="sr-only">Digite sua mensagem</label>
+                    <input type="text" id="user-input" placeholder="Escreva aqui sua mensagem...">
+                    <button type="submit" aria-label="Enviar mensagem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+            </footer>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
