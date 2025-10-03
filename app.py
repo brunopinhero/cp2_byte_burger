@@ -48,31 +48,69 @@ def chat():
     if not user_message.strip():
         return jsonify({"responses": []})
 
-    # Verifica se a mensagem pode conter múltiplas perguntas através de padrões comuns
-    # como perguntas sobre cardápio, preço, tempo de entrega, etc.
+    # Análise de palavras-chave por categoria para detectar múltiplas intenções
     keywords = {
         'preço': ['preço', 'preco', 'valor', 'custa', 'custo', 'quanto'],
-        'cardápio': ['cardápio', 'cardapio', 'menu', 'opções', 'opcoes', 'lanches', 'hamburgueres', 'hamburgers'],
-        'tempo': ['entrega', 'demora', 'tempo', 'frete', 'delivery', 'quanto tempo']
+        'cardápio': ['cardápio', 'cardapio', 'menu', 'opções', 'opcoes', 'lanches', 'hamburgueres', 'burgers', 'combo', 'lanche'],
+        'bebida': ['bebida', 'refrigerante', 'suco', 'água', 'agua', 'refri', 'cooler', 'cerveja', 'milkshake', 'shake'],
+        'sobremesa': ['sobremesa', 'doce', 'sorvete', 'sobremesas', 'açucar', 'açúcar', 'chocolate'],
+        'entrega': ['entrega', 'demora', 'tempo', 'frete', 'delivery', 'quando chega']
     }
     
     # Conta quantas categorias de palavras-chave estão presentes na mensagem
     categories_found = sum(1 for category, words in keywords.items() 
                           if any(word in user_message.lower() for word in words))
     
-    # Se encontrar mais de uma categoria, considera como múltiplas intenções
-    is_multiple_intents = categories_found > 1
-    
-    if is_multiple_intents:
-        # Para múltiplas intenções, usamos o predict_intent uma única vez
+    # Se encontrar mais de uma categoria, processa como múltiplas intenções
+    if categories_found > 1:
         try:
             intent, probability, answer = nlp.predict_intent(user_message)
+            
+            # Se a intenção identificada já for "multiplas_intencoes", retorna uma única resposta
+            if intent == "multiplas_intencoes":
+                response_obj = {
+                    'intent': intent,
+                    'probability': float(probability),
+                    'answer': answer
+                }
+                return jsonify({"responses": [response_obj]})
+            
+            # Caso contrário, tenta processar cada parte da pergunta separadamente
+            responses = []
+            
+            # Tokeniza a mensagem em sentenças para tentar processar cada uma
+            try:
+                sentences = nltk.sent_tokenize(user_message, language='portuguese')
+            except:
+                sentences = [user_message]  # Se falhar, trata como uma única sentença
+            
+            # Se houver múltiplas sentenças e cada uma puder ter uma intenção diferente
+            if len(sentences) > 1:
+                for sentence in sentences[:MAX_SENTENCES]:
+                    if sentence.strip():
+                        try:
+                            intent, probability, answer = nlp.predict_intent(sentence)
+                            response_obj = {
+                                'intent': intent,
+                                'probability': float(probability),
+                                'answer': answer
+                            }
+                            responses.append(response_obj)
+                        except Exception as e:
+                            print(f"Erro ao processar sentença individual: '{sentence}'. Detalhes: {e}")
+                
+                # Se conseguiu extrair múltiplas respostas, retorna-as
+                if len(responses) > 1:
+                    return jsonify({"responses": responses})
+            
+            # Se não conseguiu processar em sentenças separadas, retorna a resposta da análise inicial
             response_obj = {
                 'intent': intent,
                 'probability': float(probability),
                 'answer': answer
             }
             return jsonify({"responses": [response_obj]})
+            
         except Exception as e:
             print(f"Erro ao processar múltiplas intenções: '{user_message}'. Detalhes: {e}")
             return jsonify({"responses": [{

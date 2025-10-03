@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Arquivos de Build e Compilação
+build/
+dist/
+
+# Ambientes Virtuais Python
+venv/
+*.venv
+env/
+
+# Pastas do Python Cache
+__pycache__/
+*.pyc

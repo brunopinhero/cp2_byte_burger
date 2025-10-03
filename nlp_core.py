@@ -132,16 +132,69 @@ class NLPModel:
         
         # O pré-processamento precisa ser feito antes de passar para o pipeline
         processed_text = self._preprocess(text)
-
-        # Verifica se a pergunta contém múltiplas intenções baseadas em palavras-chave
-        contains_price = any(keyword in text.lower() for keyword in ["preço", "preco", "valor", "custa", "custo", "quanto"])
-        contains_menu = any(keyword in text.lower() for keyword in ["cardápio", "cardapio", "menu", "opções", "opcoes", "lanches"])
-        contains_delivery = any(keyword in text.lower() for keyword in ["entrega", "demora", "tempo", "frete", "delivery", "quanto tempo"])
-        contains_multiple = sum([contains_price, contains_menu, contains_delivery]) > 1 or "multiplas_intencoes" in processed_text
         
-        # Se contém múltiplas intenções, retornar tag específica
-        if contains_multiple:
-            # Busca uma resposta para múltiplas intenções
+        # Análise de palavras-chave por categoria
+        keywords = {
+            'preço': ['preço', 'preco', 'valor', 'custa', 'custo', 'quanto'],
+            'cardápio': ['cardapio', 'cardápio', 'menu', 'opções', 'opcoes', 'lanches', 'hamburgueres', 'burgers', 'combo', 'lanche'],
+            'bebida': ['bebida', 'refrigerante', 'suco', 'água', 'agua', 'refri', 'cooler', 'cerveja', 'milkshake', 'shake'],
+            'sobremesa': ['sobremesa', 'doce', 'sorvete', 'sobremesas', 'açucar', 'açúcar', 'chocolate'],
+            'entrega': ['entrega', 'demora', 'tempo', 'frete', 'delivery', 'quando chega']
+        }
+        
+        # Identificar quais categorias estão presentes na mensagem
+        categories_found = {}
+        for category, words in keywords.items():
+            if any(word in text.lower() for word in words):
+                categories_found[category] = True
+        
+        # Se encontrar mais de uma categoria, processa como múltiplas intenções
+        if len(categories_found) > 1:
+            # Primeiro tenta identificar intenções específicas para cada categoria
+            responses = []
+            
+            # Predição principal (geral)
+            prediction_proba = self.model.predict_proba([processed_text])
+            best_class_index = np.argmax(prediction_proba[0])
+            main_intent = self.model.classes_[best_class_index]
+            main_confidence = prediction_proba[0][best_class_index]
+            
+            # Se a intenção principal for clara (alta confiança), usa ela
+            if main_confidence > 0.7:
+                # Buscar resposta para a intenção principal
+                for intent in self.intents['intents']:
+                    if intent['tag'] == main_intent:
+                        answer = random.choice(intent['responses'])
+                        return main_intent, main_confidence, answer
+            
+            # Caso contrário, tenta responder cada parte separadamente
+            intent_responses = []
+            
+            # Verificar cada categoria e buscar respostas específicas
+            if 'preço' in categories_found:
+                for intent in self.intents['intents']:
+                    if intent['tag'] == 'ver_preco':
+                        intent_responses.append(random.choice(intent['responses']))
+                        break
+            
+            if 'cardápio' in categories_found:
+                for intent in self.intents['intents']:
+                    if intent['tag'] == 'ver_cardapio_geral':
+                        intent_responses.append(random.choice(intent['responses']))
+                        break
+            
+            if 'entrega' in categories_found:
+                for intent in self.intents['intents']:
+                    if intent['tag'] == 'tempo_entrega':
+                        intent_responses.append(random.choice(intent['responses']))
+                        break
+            
+            # Se encontrou respostas específicas, combina-as
+            if intent_responses:
+                combined_answer = " ".join(intent_responses)
+                return "multiplas_intencoes", 0.95, combined_answer
+            
+            # Se não conseguiu responder especificamente, usa a resposta genérica de múltiplas intenções
             for intent in self.intents['intents']:
                 if intent['tag'] == "multiplas_intencoes":
                     answer = random.choice(intent['responses'])

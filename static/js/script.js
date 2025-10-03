@@ -68,8 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const res of data.responses) {
                 const probabilityPercent = Math.round(res.probability * 100);
                 const metaText = `Intenção: ${res.intent} · Confiança: ${probabilityPercent}%`;
-                addMessageToChatBox('bot', res.answer, metaText);
-                await delay(500); // Espera 500ms entre cada mensagem.
+                
+                // Se for múltiplas intenções, usar formatação especial
+                if (res.intent === 'multiplas_intencoes') {
+                    addMessageToChatBox('bot', res.answer, metaText);
+                } else {
+                    addMessageToChatBox('bot', res.answer, metaText);
+                }
+                
+                // Espera um tempo entre cada mensagem para dar tempo de ler
+                // O tempo varia de acordo com o tamanho da resposta
+                const delay_time = Math.min(Math.max(res.answer.length * 5, 500), 1500);
+                await delay(delay_time);
             }
 
         } catch (error) {
